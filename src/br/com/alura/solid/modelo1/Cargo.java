@@ -1,8 +1,8 @@
-package br.com.alura.solid.modelo;
+package br.com.alura.solid.modelo1;
 
-import br.com.alura.solid.service.DezOuVintePorcento;
-import br.com.alura.solid.service.QuinzeOuVinteCincoPorcento;
-import br.com.alura.solid.service.RegraDeCalculo;
+import br.com.alura.solid.service1.DezOuVintePorcento;
+import br.com.alura.solid.service1.QuinzeOuVinteCincoPorcento;
+import br.com.alura.solid.service1.RegraDeCalculo;
 
 public enum Cargo {
 	DESENVOLVEDOR(new DezOuVintePorcento()), 
