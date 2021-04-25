@@ -7,5 +7,6 @@ public class NotaFiscalDao implements Acoes {
 
 	public void acaoPosGerarNota(NotaFiscal nf) {
 		System.out.println("salva nf no banco");
+		
 	}
 }
