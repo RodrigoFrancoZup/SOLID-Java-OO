@@ -1,0 +1,55 @@
+Capítulo 04 - Entendendo o encpsulamento
+Nesse capítulo aprendemos:
+
+
+⦁	Escreva com suas palavras o que é "encapsulamento".
+
+	Minha resposta: Encapsulamento é esconder a implementação de um método X dentro da classe que tem aquela finalidade, por exemplo, o método fecharFatura tem que ser implementado dentro da classe Fatura, não podemos deixar essa regra de negócio vazar para outra classe, ou seja, um método fora da classe Fatura resolvendo essa tarefa.
+
+	Reposta do instrutor: Encapsular é esconder os detalhes da implementação dentro da classe. Dessa forma, as classes que farão uso dela, não saberão como ela funciona internamente. A vantagem disso é que conseguimos depois facilmente alterar a implementação, sem que ela impacte nas classes dependentes.
+
+⦁	Como fazer para descobrir se um código está encapsulado ou não?
+
+	Minha resposta: Ao ver um método sendo usado por outra classe, eu só posso saber o que ele faz através do seu nome (pois ele deve ser semântico), não posso saber o que o método está fazendo através dos parâmetros que ele usa e nem mesmo por trecho de código.
+
+	Resposta do instrutor: Uma alternativa para isso é criar um trecho de código (seja uma nova classe, ou mesmo um teste automatizado) e fazer uso da classe. Nesse código, você deverá o tempo todo se fazer a pergunta: "Consigo saber COMO a classe está implementando essa regra de negócio?". Se a resposta for sim, então aquele comportamento não está bem encapsulado.
+
+⦁	O que é a tal da Lei de Demeter? O que o desenvolvedor ganha quando a segue?
+
+	Minha resposta: É a Lei que diz que devemos evitar que um método get() fica chamando outro para depois executar algo, por exemplo: getPedido().getNotaFiscal().enviarNotaPorEmail();
+	Ao evitar isso, teremos mais facilidade para corrigir problemas propagados, pois quando mudar algo na classe Pedido, certamente teremos que mudar algo nas classes que utilizam essa classe. Corrigimos isso com o encapsulamento, criando dentro da classe NotaFiscal o método enviaEmail;
+
+	Resposta do instrutor:A Lei de Demeter, de maneira simples, diz para que você evite ao máximo fazer expressões como a.getB().getC().getD().acao(). O problema dessa cadeia, é que a classe que contém essa expressão, conhece muito sobre o comportamento da classe A, depois da classe B, até D. Se alguma delas mudar, a mudança será propagada para muitos lugares.
+
+	Diminuir a quantidade de invocações como essas ajuda você a encapsular melhor o comportamento e o funcionamento interno das classes.
+
+⦁	Mão na massa - Corrija o problema de encapsulamento do código abaixo:
+	1.	Na classe fatura apagamos o método setPago(), pois não podemos falar que uma fatura foi paga sem passar por uma regra de negócio. CUIDADO COM MÉTODOS SETTERS;
+	2.	O método getPagamento() que retrona uma List<Pagamento> agora retorna: return Collections.unmodifiableList(pagamentos); Assim não será possível mudar essa lista;
+	3.	Criamos na classe Lista o método:
+	
+		public void adicionaPagamento(Pagamento pagamento) {
+	 	this.pagamentos.add(pagamento); 
+			if (valorTotalDosPagamento() > this.valor) { 
+			this.pago = true; } 
+		}
+
+	Assim encapsulamos essa tarefa na classe certa, agora quem adiciona pagamento na fatura é a classe Fatura e nao ProcessadorDeBoletos.
+	
+	4. Criamos o método Double valorTotalDosPagamento(), pois para falar que uma fatura está paga devemos comparar com o valor total dos pagamentos. O método ficou na classe certa novamente (tiramos da classe ProcessadorDeBoletos:
+	private double valorTotalDosPagamento() { 
+		double total = 0; 
+		for (Pagamento p : pagamentos) { 
+			total += p.getValor(); 
+		} 
+	return 0;
+ 	}
+
+	5. Na classe ProcessadorDeBoletos devemos chamar os métodos corretamente:
+	
+	public void processa(List<Boleto> boletos, Fatura fatura) { 
+		for (Boleto boleto : boletos) { 
+		Pagamento pagamento = new Pagamento(boleto.getValor(), 	MeioDePagamento.BOLETO); 
+		fatura.adicionaPagamento(pagamento); 
+		}
+ 	}
