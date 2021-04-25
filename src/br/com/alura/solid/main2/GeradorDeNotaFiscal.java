@@ -1,33 +1,33 @@
 package br.com.alura.solid.main2;
 
-import br.com.alura.solid.dao2.NotaFiscalDao;
+import java.util.List;
+
 import br.com.alura.solid.modelo2.Fatura;
 import br.com.alura.solid.modelo2.NotaFiscal;
-import br.com.alura.solid.service2.EnviadorDeEmail;
+import br.com.alura.solid.service2.Acoes;
 
 public class GeradorDeNotaFiscal {
 
-    private final EnviadorDeEmail email;
-    private final NotaFiscalDao dao;
+	List<Acoes> acoes;
 
-    public GeradorDeNotaFiscal(EnviadorDeEmail email, NotaFiscalDao dao) {
-        this.email = email;
-        this.dao = dao;
-    }
+	public GeradorDeNotaFiscal(List<Acoes> acoes) {
+		this.acoes = acoes;
+	}
 
-    public NotaFiscal gera(Fatura fatura) {
+	public NotaFiscal gera(Fatura fatura) {
 
-        double valor = fatura.getValorMensal();
+		double valor = fatura.getValorMensal();
 
-        NotaFiscal nf = new NotaFiscal(valor, impostoSimplesSobreO(valor));
+		NotaFiscal nf = new NotaFiscal(valor, impostoSimplesSobreO(valor));
 
-        email.enviaEmail(nf);
-        dao.persiste(nf);
+		for (Acoes aux : acoes) {
+			aux.acaoPosGerarNota(nf);
+		}
 
-        return nf;
-    }
+		return nf;
+	}
 
-    private double impostoSimplesSobreO(double valor) {
-        return valor * 0.06;
-    }
+	private double impostoSimplesSobreO(double valor) {
+		return valor * 0.06;
+	}
 }
