@@ -1,0 +1,43 @@
+Capítulo 01 - Coesão e Single Responsibility Principle
+Nesse capítulo aprendemos:
+
+⦁	O que é uma Classe Coesa?
+
+	Minha resposta: É aquela que não faz diversas atividades de diversos assuntos distintos, é uma classe focada em apenas um tipo de serviço. Não é uma classe que nunca irá parar de crescer, pois uma classe coesa é bem definido o que ela faz.
+
+	Resposta do instrutor: Uma classe coesa é aquela que contém apenas uma única responsabilidade. Ou seja, ela toma conta de apenas um conceito dentro do sistema.
+	Classes coesas tendem a ser menores, e por consequência, mais fáceis de serem lidas e mantidas. Elas também tendem a ser mais reutilizáveis, afinal são mais fáceis.
+
+⦁	Como fazer para detectar classes não coesas? Como identificá-las em nosso sistema?
+
+	Minha resposta: Uma maneira de identificar classes não coesas é respondendo a pergunta "Essa classe vai continuar crescendo com o surgimento de novas funções/regras de negócios?" Se a resposta for sim, talvez a classe não esteja coesa, pois com surgimento de novas regras de negócios talvez o correto seria isolar a nova regra em outra classe. Outro fator que pode indicar classes não coesas é o não uso de interface e o uso exagerado de condicionais, como Case, IF...
+
+	Resposta do instrutor: Classes que não são coesas geralmente possuem muitos comportamentos (métodos). Além disso, elas também tem a tendência de crescer pra sempre, ou seja, o tempo inteiro o desenvolvedor tem que por a mão para escrever mais código.
+
+⦁	Ao encontrarmos uma classe não coesa, a ideia é refatorá-la. Como fazer para que uma classe torne-se coesa?
+
+	Minha resposta: Podemos isolar os métodos de uma classe não coesa em novas classes e juntamente com isso fazer as classes implementarem interfaces caso elas tenham funções iguais (a tarefa é igual, embora que o jeito e valores de se fazer possa ser diferente).
+
+	Resposta do instrutor: Uma classe não coesa contém muitas diferentes responsabilidades. A ideia é então separar essas responsabilidades em classes diferentes. Como no caso do vídeo, onde separamos cada regra de cálculo em um lugar separado. Repare também que a classe Funcionario também é coesa, já que ela cuida apenas das responsabilidades e comportamentos de um funcionário.
+
+	Então, encontrou uma classe com muita responsabilidade, divida-a em várias classes menores.
+
+⦁	O que é o SRP (Single Responsibility Principle)?
+
+	Minha resposta: É a classe coesa, aquela que tem apenas uma responsabilidade.
+
+	Resposta do instrutor: É um dos princípios SOLID, que o nome já diz, a ideia é ter uma única responsabilidade por classe. Ou seja, coesão.
+
+⦁	Mão na massa (Transformar a classe em coesa):
+	1.	Para isso cada método da classe não coesa tornou-se uma classe;
+	2.	Como cada classe tinha o método calcula (embora cada uma fazia o calculo de um jeito) foi criado uma interface com o método calcula. Toda classe derivada do método passou a implementar essa interface;
+	3.	Para se criar um enum (tipo para classificar um objeto) passou a ser necessário passar no seu construtor uma classe de implementação da interface. Lembrando que se temos uma Interface X e a classe Y implementa X, podemos dizer que Y é do tipo X.
+	4.	Por fim na classe principal conseguimos através do tipo (Enum) resgatar qual a implementação da interface chamar.
+
+⦁	Você consegue enxergar quais são as vantagens de fazer com que classes dependam apenas de métodos que precisam?
+
+	Minha resposta: Facilita o entendimento do projeto para os envolvidos.
+
+	Resposta do instrutor: Novamente, é propagação de mudanças. Se a interface mudar, a mudança tende a ser propagada em menos pontos. Lembre-se que a nossa ideia ao longo desse curso, é diminuir ao máximo a quantidade de pontos de mudança.
+
+	Por curiosidade, esse princípio faz mais sentido ainda em linguagens mais antigas como C++. Ao mudar uma interface, você é obrigado a recompilar e redeployar todo o código. Em sistemas grandes, isso pode ser bastante problemático. Esse princípio nasceu nessa época. Hoje, esse problema de deploy é menor, mas ainda assim o problema de propagação de mudanças é importante, e deve ser resolvido.
