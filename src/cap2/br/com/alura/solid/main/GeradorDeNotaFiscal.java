@@ -1,10 +1,10 @@
-package br.com.alura.solid.main2;
+package cap2.br.com.alura.solid.main;
 
 import java.util.List;
 
-import br.com.alura.solid.modelo2.Fatura;
-import br.com.alura.solid.modelo2.NotaFiscal;
-import br.com.alura.solid.service2.Acoes;
+import cap2.br.com.alura.solid.modelo.Fatura;
+import cap2.br.com.alura.solid.modelo.NotaFiscal;
+import cap2.br.com.alura.solid.service.Acoes;
 
 public class GeradorDeNotaFiscal {
 

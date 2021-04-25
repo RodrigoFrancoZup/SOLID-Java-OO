@@ -1,0 +1,34 @@
+Capítulo 03 - Classes abertas, Open Closed e Dependency Inversion Principles
+Nesse capítulo aprendemos:
+
+⦁	Como o princípio do OCP nos ajuda a escrever classes mais flexíveis?
+
+	Minha resposta: OCP define que devemos ter classes fechadas para alteração, ou seja, não devemos ficar indo na classe e escrevendo muita coisa nova a cada regra de negócio nova que surge, mas ao mesmo tempo temos que ser capaz de mudar o seu comportamento. Como fazer isso? Simples, usando a abstração, devemos ver o que tem em comum em diversas operações e criar uma interface genérica para as funções e a nossa classe passa a depender das implementações dessas interfaces, logo para mudar o seu comportamento basta mudar a implementação usada.
+
+	Resposta do instrutor: O OCP diz para escrevermos classes que sejam facilmente extensíveis (ou seja, abertas pra extensão). Dessa forma, mudar o comportamento da classe atual é fácil: basta passar outras implementações concretas das abstrações que ela depende.
+
+	Classes abertas para extensão, mas fechadas para modificação, também são mais coesas.
+
+⦁	O que é o DIP? E qual a vantagem de sempre depender de classes estáveis?
+
+	Minha resposta: DIP é o conceito que devemos acoplar nossa classe as classes estáveis. A vantagem disso é que haverá pouca propagação de mudanças/erros (Exemplo: Classe X depende de Y, mas Y não é estável, logo ao alterar Y resultará em mudanças em X).
+
+	Resposta do instrutor:O DIP nos diz para sempre dependermos de módulos que sejam mais estáveis que o módulo corrente. Abstrações devem depender de abstrações, e implementação deve depender de abstração.
+
+	Com isso, diminuímos o risco do acoplamento, afinal abstrações são estáveis, e tendem a não mudar frequentemente, diminuindo a propagação de problemas.O DIP nos diz para sempre dependermos de módulos que sejam mais estáveis que o módulo corrente. Abstrações devem depender de abstrações, e implementação deve depender de abstração.
+
+	Com isso, diminuímos o risco do acoplamento, afinal abstrações são estáveis, e tendem a não mudar frequentemente, diminuindo a propagação de problemas.
+
+⦁	Na sua opinião, como o OCP e o DIP se relacionam?
+
+	Minha resposta: OCP visa aumentar a coesão da nossa classe, pois ela está fechada para alterações, logo não vamos ficar aumentando seu código e o DIP visa diminuir o acoplamento, fazendo nossa classe depender de classes estáveis. O OCP contribui com DIP, pois OCP proporcionará classes estáveis e o DIP sugere que sempre que preciso devemos depender de classes estáveis. Lembrando que nunca teremos classes 100% coesas e 100% sem acoplamentos.
+
+	Reposta do instrutor: Ao pensar em classes abertas, o programador precisa pensar em abstrações. Afinal, é por meio delas que ele vai conseguir estender o comportamento.
+
+	Ao pensar em abstrações, idealmente o programador também pensa na estabilidade de cada uma dessas abstrações. Afinal, ele precisa gerenciar o problema do acoplamento.
+
+⦁	Mão na massa - Faça com que a classe abaixo fique aberta para extensão:
+
+	1.	Existia a classe Frete e TabelaDePrecoPadrao, criamos uma interface para cada classe. E nas interfaces colocamos a assinatura do método que cada classe ja tinha;
+	2.	A CalculadoraDePreco (essa classe usava as duas classes: Frete e TabelaDePrecoPadrao)  passa a ter em seu construtor dois parâmetros do tipo das interfaces;
+	3.	Quando alguem agora for usar a CalculadoraDePreco irá passar qual implementação a pessoa quer usar, caso apareça novas regras de negócios, basta criar novas implementações. Assim a classe CalculadoraDePreco ta fechada para alteraçao, mas conseguimos mudar seu comportamento.

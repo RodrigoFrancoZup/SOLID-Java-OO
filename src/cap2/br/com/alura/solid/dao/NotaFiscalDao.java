@@ -1,7 +1,7 @@
-package br.com.alura.solid.dao2;
+package cap2.br.com.alura.solid.dao;
 
-import br.com.alura.solid.modelo2.NotaFiscal;
-import br.com.alura.solid.service2.Acoes;
+import cap2.br.com.alura.solid.modelo.NotaFiscal;
+import cap2.br.com.alura.solid.service.Acoes;
 
 public class NotaFiscalDao implements Acoes {
 

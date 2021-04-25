@@ -1,6 +1,6 @@
-package br.com.alura.solid.service2;
+package cap2.br.com.alura.solid.service;
 
-import br.com.alura.solid.modelo2.NotaFiscal;
+import cap2.br.com.alura.solid.modelo.NotaFiscal;
 
 public class EnviadorDeEmail implements Acoes{
 

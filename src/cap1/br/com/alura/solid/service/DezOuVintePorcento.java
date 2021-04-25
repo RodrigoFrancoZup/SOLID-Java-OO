@@ -1,6 +1,6 @@
-package br.com.alura.solid.service1;
+package cap1.br.com.alura.solid.service;
 
-import br.com.alura.solid.modelo1.Funcionario;
+import cap1.br.com.alura.solid.modelo.Funcionario;
 
 public class DezOuVintePorcento implements RegraDeCalculo {
 

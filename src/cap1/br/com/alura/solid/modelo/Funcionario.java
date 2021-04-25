@@ -1,4 +1,4 @@
-package br.com.alura.solid.modelo1;
+package cap1.br.com.alura.solid.modelo;
 
 import java.util.Calendar;
 

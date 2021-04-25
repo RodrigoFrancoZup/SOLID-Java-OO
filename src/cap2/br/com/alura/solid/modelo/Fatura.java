@@ -1,4 +1,4 @@
-package br.com.alura.solid.modelo2;
+package cap2.br.com.alura.solid.modelo;
 
 public class Fatura {
 
