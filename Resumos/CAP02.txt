@@ -1,0 +1,27 @@
+Capítulo 02 - Acoplamento e a estabilidade
+Nesse capítulo aprendemos:
+
+⦁	Por que acoplamento é tão perigoso em projetos orientados a objetos?
+
+	Minha resposta: Porque quando a classe X depende da classe Y, a classe X se torna uma classe frágil, pois se a classe Y parar de funcionar a X também para, outro fator é a mudança, se a classe Y muda certamente irá acarretar mudança na classe X.
+
+	Resposta do instrutor: O problema do acoplamento é que, a partir do momento que uma classe A depende de uma classe B, qualquer mudança em B pode impactar A. Ou seja, quanto mais dependermos de outras classes, mais chances temos de uma mudança na dependência afetar a classe dependente. E, como sabemos, na prática, temos classes que mudam com muita frequência.
+
+⦁	O que são classes estáveis? E como fazer para criar classes como essas em nosso sistema?
+
+	Minha resposta:  São aquelas que sofrem poucas mudanças, como a classe String, List, entre outras. Devemos sempre que possível depender de classes desse tipo. Uma maneira de criar classes desse tipo é fazer a classe implementar uma interface.
+
+	Resposta do instrutor: Classes estáveis são aquelas que tendem a mudar muito pouco. A vantagem de classes como essas é que são ótimas classes para se depender, já que elas não propagarão mudança para as classes dependentes.
+
+	Classes estáveis são aquelas que geralmente já são dependidas por muitas outras classes do sistema. Um bom exemplo disso são interfaces, pois elas geralmente possuem muitas implementações, e aí isso faz com que o desenvolvedor pense melhor antes de sair mudando a interface.
+
+⦁	Como fazer para resolver o problema do acoplamento?
+
+	Minha resposta: O acoplamento nunca será zerado, o que temos que fazer é passar a depender de classes estáveis. Para isso podemos passar a depender mais de classes que já possuem muitas dependências, por exemplo as interfaces, pois se uma classe já tem muito dependente (implementações no caso das interfaces), certamente ela terá poucas mudanças, pois da medo mudá-las e estragar tudo.
+
+	Resposta do instrutor: A ideia é refatorar as classes para elas, quando necessitem de uma dependência, dependam de classes estáveis. Assim, a classe estará segura em relação a propagação de mudanças. É por isso que falamos muito sobre a ideia de "programar para interfaces", afinal, interfaces, além de nos possibilitar o uso de polimorfismo, ainda são estáveis.
+
+⦁	Mão na massa - Diminuir o acoplamento.
+	1.	Criamos uma interface chamada acoes, com um metodo chamado acaoAposGerarNota(NotaFiscal);
+	2.	As classes de enviar email(NotaFiscal) e salvar(NotaFiscal) passaram a implementar a interface;
+	3.	Agora para criar a classe GeradorDeNotaFiscal, nós temos que passar uma lista de acoes (das implementacoes da interface), e assim será feito as ações através do loop desta lista.
