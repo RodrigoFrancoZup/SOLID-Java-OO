@@ -1,0 +1,102 @@
+Capítulo 05 - Herança e o Liskov Substitutive Principle
+Nesse capítulo aprendemos:
+
+⦁	Por que fazer bom uso de herança é difícil?
+
+	Minha resposta: Porque é difícil achar um cenário ideal para aplicar herança, onde a classe filha não terá regras de negócio mais rígidas que a da mãe, pois se isso ocorrer não será possível desfrutar do polimorfismo (Uma referência do tipo Mãe apontar para o objeto filho).
+
+	Resposta do instrutor: Porque para se fazer bom uso de herança, o desenvolvedor deve pensar em cada método que a classe filha herdou e sobrescreveu, e lembrar que as pré-condições não podem ser apertadas, e as pós-condições não podem serem afrouxadas.
+
+	Isso não é tão simples, e requer muito raciocínio do desenvolvedor, sempre que for reescrever um comportamento.
+
+⦁	Qual a alternativa para se reaproveitar comportamento, sem fazer uso de herança?
+
+	Minha resposta: Uma alternativa é utilizar a composição. Para constuir a classe X vamos depender da classe Y, ou seja, para criar a classe X vamos passar a Y no construor.
+
+	Reposta do instrutor: Você pode fazer uso de composição para reaproveitar comportamentos. Diferente da herança, ao compor um objeto, você não precisa se preocupar com as pré e pós condições.
+
+	No entanto, ao fazer uso de herança, você ganha o uso de polimorfismo. Quando bem usada, a herança também é uma excelente opção.
+
+⦁	Mão na massa - Faça uso de composição para resolver o problema de herança abaixo:
+	
+	1.	Notamos que a herança era feito pela classe ContaComum (Pai) e ContaDeEstudante (filha), e que ambas tinham e manipulavam saldo;
+	
+	2.	Cria-se a classe GeranciamentoDeSaldo;
+	
+	3.	Na classe GeranciamentoDeSalvo levo métodos que são iguais para as classes (Pai e Filha);
+	
+	4.	Criar um atributo do tipo GerenciamentoDeSaldo nas classes ContaComum e ContaDeEstudante. No Construtor de ambas as classes passam a dar new GerenciamentoDeSaldo();
+	
+	5.	Os métodos das classes ContaComum e ContaDeEstudante passam a chamar através do atributo GeranciamentoDeSaldo os métodos de GeranciamentoDeSaldo;
+	
+	6.	Acabar com a herança entre as classes citadas no item 1;
+	
+	7.	As classes ficaram assim:
+
+	public class ContaDeEstudante {
+		private int milhas; 
+		private GerenciamentoDeSaldo gerenciamentoDeSaldo; 
+
+	public ContaDeEstudante() {
+ 		this.gerenciamentoDeSaldo = new GerenciamentoDeSaldo(); 
+	} 
+
+	public void deposita(double valor) {
+		gerenciamentoDeSaldo.deposita(valor); 
+		this.milhas += (int) valor; 
+	} 
+
+	public int getMilhas() { 
+		return milhas; } 
+	}
+
+
+
+	public class ContaComum { 
+	private GerenciamentoDeSaldo gerenciamentoDeSaldo; 
+	
+	public ContaComum() { 
+		this.gerenciamentoDeSaldo = new GerenciamentoDeSaldo(); 
+	} 
+
+	public void saca(Double valor) { 
+		gerenciamentoDeSaldo.saca(valor); 
+	} 
+
+	public void deposita(Double valor) { 
+		gerenciamentoDeSaldo.deposita(valor); 
+	} 
+
+	public void rende() { 
+		this.gerenciamentoDeSaldo.rende(1.1); 
+	} 
+
+	public Double getSaldo() { 
+		return this.gerenciamentoDeSaldo.getSaldo(); }
+ 	}
+
+
+	public class GerenciamentoDeSaldo { 
+	private Double saldo; 
+
+	public void saca(double valor) { 
+	if (valor <= this.saldo) {
+		this.saldo -= valor; } 
+	else {
+ 		throw new IllegalArgumentException(); }
+ 	} 
+
+	public void deposita(double valor) {
+		this.saldo += valor; 
+	}
+
+	public double getSaldo() { 
+		return saldo; 
+	} 
+
+	public void rende(Double taxa) { 
+		this.saldo *= this.saldo * taxa; }
+ 	}
+
+	Obs: Ao trocar heança por Composição, nós abrimos mão do Polimorfismo!
+
